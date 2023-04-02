@@ -18,7 +18,7 @@ for (let key of keys) {
     } else if (value == '=') {
       let result = eval(input);
 
-      display_input.innerHTML = result;
+      display_output.innerHTML = result;
     } else if (value == 'brackets') {
       if (
         input.indexOf('(') == -1 ||
@@ -33,7 +33,7 @@ for (let key of keys) {
           input.indexOf(')') != -1 &&
           input.lastIndexOf('(') > input.lastIndexOf(')'))
       ) {
-        input -= ')';
+        input += ')';
       }
       display_input.innerHTML = input;
     } else {
