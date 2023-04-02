@@ -18,7 +18,7 @@ for (let key of keys) {
     } else if (value == '=') {
       let result = eval(input);
 
-      display_output.innerHTML = result;
+      display_output.innerHTML = CleanOutput(result);
     } else if (value == 'brackets') {
       if (
         input.indexOf('(') == -1 ||
@@ -49,21 +49,42 @@ function CleanInput(input) {
 
   for (let i = 0; i < input_array_length; i++) {
     if (input_array[i] == '*') {
-      input_array[i] = `<span class="operator">x</span>`;
+      input_array[i] = ` <span class="operator">x</span> `;
     } else if (input_array[i] == '/') {
-      input_array[i] = `<span class="operator">÷</span>`;
+      input_array[i] = ` <span class="operator">÷</span> `;
     } else if (input_array[i] == '+') {
-      input_array[i] = `<span class="operator">+</span>`;
+      input_array[i] = ` <span class="operator">+</span> `;
     } else if (input_array[i] == '-') {
-      input_array[i] = `<span class="operator">-</span>`;
+      input_array[i] = ` <span class="operator">-</span> `;
     } else if (input_array[i] == '(') {
-      input_array[i] = `<span class="brackets">(</span>`;
+      input_array[i] = ` <span class="brackets">(</span> `;
     } else if (input_array[i] == ')') {
-      input_array[i] = `<span class="brackets">)</span>`;
+      input_array[i] = ` <span class="brackets">)</span> `;
     } else if (input_array[i] == '%') {
-      input_array[i] = `<span class="percent">%</span>`;
+      input_array[i] = ` <span class="percent">%</span> `;
     }
   }
 
   return input_array.join('');
+}
+
+function CleanOutput(output) {
+  let output_string = output.toString();
+  let decimal = output_string.split('.')[1];
+  output_string = output_string.split('.')[0];
+
+  let output_array = output_string.split('');
+
+  if (output_array.length > 3) {
+    for (let i = output_array.length - 3; i > 0; i -= 3) {
+      output_array.splice(i, 0, ',');
+    }
+  }
+
+  if (decimal) {
+    output_array.push('.');
+    output_array.push(decimal);
+  }
+
+  return output_array.join('');
 }
