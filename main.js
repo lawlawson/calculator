@@ -10,7 +10,7 @@ for (let key of keys) {
   key.addEventListener('click', () => {
     if (value == 'clear') {
       input = '';
-      display_input.innerHTML = '';
+      display_input.innerHTML = 0;
       display_output.innerHTML = '';
     } else if (value == 'backspace') {
       input = input.input.slice(0, -1);
@@ -96,6 +96,10 @@ function validateInput(value) {
   let operators = ['+', '-', '*', '/'];
 
   if (value == '.' && last_input == '.') {
+    return false;
+  }
+
+  if (value == '0' && last_input == '0') {
     return false;
   }
 
